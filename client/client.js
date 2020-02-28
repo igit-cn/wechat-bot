@@ -14,12 +14,27 @@ const TXT_MSG = 555;
 const PIC_MSG = 500;
 const SEND_TXT_MSG_SUCCSESS = 556;
 const SEND_TXT_MSG_FAIL     = 557;
+const AT_MSG = 550;
 
 
 function getid()
 {
    const id = Date.now();
    return id.toString();
+}
+function send_at_msg()
+{
+  const j={
+    id:getid(),
+    type:AT_MSG,
+    roomid:'23023281066@chatroom',//not null
+    wxid:'wxid',//not null
+    content:'今天过来一起喝酒！',//not null
+    nickname:'狗蛋'
+  };
+  
+  const s = JSON.stringify(j);
+  return s;
 }
 function send_pic_msg()
 {
@@ -101,6 +116,13 @@ function heartbeat(j)
 }
 ws.on('open', function open() 
 {
+  ws.send(send_at_msg());
+  //ws.send(send_wxuser_list());
+
+  /** 发送群AT消息
+   * ws.send(send_at_msg());
+   */
+
   /**获取微信通讯录好友列表
    * ws.send(send_wxuser_list());
    */
@@ -113,7 +135,7 @@ ws.on('open', function open()
     */
   /*发送信息调用上面两个函数即可，可自行改造*/
 
-  ws.send(send_pic_msg());
+  //ws.send(send_pic_msg());
   //ws.send(send_txt_msg());
   
 });
@@ -125,7 +147,7 @@ ws.on('close', function close() {
 ws.on('message', function incoming(data) 
 {
   //break;
-  return;
+  //return;
   const j = JSON.parse(data);
   const type = j.type;
   switch(type)
