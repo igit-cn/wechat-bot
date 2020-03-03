@@ -1,5 +1,22 @@
 
 # Change Log
+## version 2.0.1.55(2020-03-02)
+new feature:wechat urgrade to 2.8.0.121  
+bugfix:#9  
+
+## version 1.5.1.53(2020-03-01)
+new feature:#7  
+enhanced:  
+1、pic msg optimized  
+2、txt msg optimized  
+3、user list msg optimized  
+
+## version 1.2.1.52(2020-02-28)
+new feature:get chatroom member list  
+bugfix:random carsh(#6)  
+
+## version 1.1.1.51(2020-02-27)
+new feature:send at msg
 
 ## version 1.0.1.50 (2020-02-21)
 bugfix:incompelete list bugfixed(#5)

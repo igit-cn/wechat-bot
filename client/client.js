@@ -12,15 +12,45 @@ const GET_USER_LIST_SUCCSESS = 5001;
 const GET_USER_LIST_FAIL     = 5002;
 const TXT_MSG = 555;
 const PIC_MSG = 500;
-const SEND_TXT_MSG_SUCCSESS = 556;
-const SEND_TXT_MSG_FAIL     = 557;
 const AT_MSG = 550;
+const CHATROOM_MEMBER = 5010;
 
 
 function getid()
 {
    const id = Date.now();
    return id.toString();
+}
+function handle_memberlist(j)
+{
+   const data = j.content;
+   for(const item of data)
+   {
+      console.log("------"+item.roomid+"--------");
+      const memberlist=item.member;
+      //const len = nicklist.length();
+      //console.log(len);
+      for(const m of memberlist)
+      {
+          //console.log(m);//获得每个成员的wxid
+      }
+      /*for(const n of nicklist)//目前不建议使用
+      {
+        console.log(n);//获得每个成员的昵称，注意，没有和wxi对应的关系
+      }*/
+   }
+}
+function get_chatroom_memberlist()
+{
+  const j={
+    id:getid(),
+    type:CHATROOM_MEMBER,
+    wxid:'null',
+    content:'op:list member'
+  };
+
+  const s= JSON.stringify(j);
+  return s;
 }
 function send_at_msg()
 {
@@ -42,7 +72,8 @@ function send_pic_msg()
     id:getid(),
     type:PIC_MSG,
     content:'C:\\Users\\14988\\Desktop\\temp\\2.jpg',
-    wxid:'22428457414@chatroom'
+    //wxid:'22428457414@chatroom'
+    wxid:'23023281066@chatroom'
   };
   
   const s = JSON.stringify(j);
@@ -58,8 +89,8 @@ function send_txt_msg()
   const j={
     id:getid(),
     type:TXT_MSG,
-    content:'有没有做PC微信机器人的？',//文本消息内容
-    wxid:'23092636608@chatroom'//wxid
+    content:'请求次数超限制!',//文本消息内容
+    wxid:'zhanghua_cd'//wxid
   };
   const s = JSON.stringify(j);
   return s;
@@ -100,13 +131,14 @@ function handle_wxuser_list(j)
 function handle_recv_msg(j)
 {
    
-   const content = j.content;
+   /*const content = j.content;
    const wxid =j.wxid;
    const sender = j.sender;
 
-   console.log('接收人:'+wxid);
+   consoconsole.log(j);le.log('接收人:'+wxid);
    console.log('内容：'+content);
-   console.log('发送人：'+sender);//如果为空，那就是你自己发的
+   console.log('发送人：'+sender);*///如果为空，那就是你自己发的
+   console.log(j);
 }
 
 function heartbeat(j)
@@ -116,8 +148,16 @@ function heartbeat(j)
 }
 ws.on('open', function open() 
 {
-  ws.send(send_at_msg());
-  //ws.send(send_wxuser_list());
+  //ws.send(send_pic_msg());
+  //ws.send(send_txt_msg());
+  //ws.send(get_chatroom_memberlist());
+  //ws.send(send_at_msg());
+
+  ws.send(send_wxuser_list());
+
+  /** 获取群好友列表
+   * ws.send(get_chatroom_memberlist());
+   */
 
   /** 发送群AT消息
    * ws.send(send_at_msg());
@@ -152,6 +192,16 @@ ws.on('message', function incoming(data)
   const type = j.type;
   switch(type)
   {
+    case TXT_MSG:
+      console.log(j);
+      break;
+    case PIC_MSG:
+      console.log(j);
+      break;
+    case CHATROOM_MEMBER:
+      console.log(j);
+      handle_memberlist(j);
+      break;
     case RECV_TXT_MSG:
       handle_recv_msg(j);
     break;
@@ -164,12 +214,12 @@ ws.on('message', function incoming(data)
     case GET_USER_LIST_FAIL:
       handle_wxuser_list(j);
       break;
-    case SEND_TXT_MSG_SUCCSESS:
-      handle_recv_msg(j);
-      break;
-    case SEND_TXT_MSG_FAIL:
-      handle_recv_msg(j);
-      break;
+    //case SEND_TXT_MSG_SUCCSESS:
+      //handle_recv_msg(j);
+      //break;
+    //case SEND_TXT_MSG_FAIL:
+      //handle_recv_msg(j);
+      //break;
     default:
       break;
   }
