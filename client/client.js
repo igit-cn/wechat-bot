@@ -14,12 +14,25 @@ const TXT_MSG = 555;
 const PIC_MSG = 500;
 const AT_MSG = 550;
 const CHATROOM_MEMBER = 5010;
-
+const PERSONAL_INFO = 6500;
+const DEBUG_SWITCH = 6000;
 
 function getid()
 {
    const id = Date.now();
    return id.toString();
+}
+function debug_switch()
+{
+   const j={
+     id:getid(),
+     type:DEBUG_SWITCH,
+     content:'off',//on,off
+     wxid:'ROOT'
+   };
+   const s= JSON.stringify(j);
+   return s;
+
 }
 function handle_memberlist(j)
 {
@@ -60,7 +73,7 @@ function send_at_msg()
     roomid:'23023281066@chatroom',//not null
     wxid:'wxid',//not null
     content:'今天过来一起喝酒！',//not null
-    nickname:'狗蛋'
+    nickname:'[微笑]Python'
   };
   
   const s = JSON.stringify(j);
@@ -73,7 +86,7 @@ function send_pic_msg()
     type:PIC_MSG,
     content:'C:\\Users\\14988\\Desktop\\temp\\2.jpg',
     //wxid:'22428457414@chatroom'
-    wxid:'23023281066@chatroom'
+    wxid:'zhanghua_cd'
   };
   
   const s = JSON.stringify(j);
@@ -84,12 +97,23 @@ function send_pic_msg()
  * send_txt_msg : 发送消息给好友
  * 
  */
+function get_personal_info()
+{
+  const j={
+    id:getid(),
+    type:PERSONAL_INFO,
+    content:'op:personal info',
+    wxid:'ROOT'
+  };
+  const s = JSON.stringify(j);
+  return s;
+}
 function send_txt_msg()
 {
   const j={
     id:getid(),
     type:TXT_MSG,
-    content:'请求次数超限制!',//文本消息内容
+    content:'【汽车新闻】\n1、2月中国汽车经销商库存预警指数为81.2%\n  https://auto.sina.com.cn/news/hy/2020-03-02/detail-iimxyqvz7206147.shtml\n2、2020年1月合资品牌插混车型上牌量超自主 今年或将全面超越\n  https://auto.sina.com.cn/news/zz/2020-03-02/detail-iimxyqvz7204399.shtml\n3、2月汽车经销商库存预警指数81.2% 同比上升27.7%\n  https://auto.sina.com.cn/news/hy/2020-03-02/detail-iimxyqvz7212598.shtml\n4、车谭|推进数字化转型 比亚迪与西门子达成战略合作\n  https://auto.sina.com.cn/news/hy/2020-03-02/detail-iimxxstf5752750.shtml\n5、业务量下滑，有员工被停工待岗，优信称经营遇到困难\n  https://auto.sina.com.cn/news/zz/2020-03-02/detail-iimxyqvz7183264.shtml\n6、外媒：中国电动车制造商正纷纷转向磷酸铁锂电池 以大幅降低成本\n  https://auto.sina.com.cn/news/hy/2020-03-02/detail-iimxyqvz7194871.shtml\n7、苹果自动驾驶项目裁员190人\n  https://auto.sina.com.cn/news/zz/2020-03-02/detail-iimxxstf5750692.shtml\n8、二手车复工率不足五成  车商盼消除壁垒提振消费\n  https://auto.sina.com.cn/news/zz/2020-03-02/detail-iimxxstf5742747.shtml\n9、车谭|天天拍车：2月份二手车交易逐渐回暖\n  https://auto.sina.com.cn/news/hy/2020-03-02/detail-iimxyqvz7187012.shtml\n10、因“货不对版”特斯拉停止全国交付？ 特斯拉：并未收到相关消息\n  https://auto.sina.com.cn/news/hy/2020-03-02/detail-iimxyqvz7171968.shtml\n',//文本消息内容
     wxid:'zhanghua_cd'//wxid
   };
   const s = JSON.stringify(j);
@@ -148,12 +172,23 @@ function heartbeat(j)
 }
 ws.on('open', function open() 
 {
+  //ws.send(get_personal_info());
   //ws.send(send_pic_msg());
   //ws.send(send_txt_msg());
   //ws.send(get_chatroom_memberlist());
-  //ws.send(send_at_msg());
+  ws.send(send_at_msg());
 
-  ws.send(send_wxuser_list());
+
+  //ws.send(debug_switch());
+  //ws.send(send_wxuser_list());
+
+  /** debugview调试信息开关，默认为关
+   * ws.send(debug_switch());
+   */
+
+  /** 获取微信个人信息
+   * ws.send(get_personal_info());
+   */
 
   /** 获取群好友列表
    * ws.send(get_chatroom_memberlist());
@@ -189,9 +224,19 @@ ws.on('message', function incoming(data)
   //break;
   //return;
   const j = JSON.parse(data);
+  //console.log(j);
   const type = j.type;
   switch(type)
   {
+    case AT_MSG:
+      console.log(j);
+      break;
+    case DEBUG_SWITCH:
+      console.log(j);
+      break;
+    case PERSONAL_INFO:
+      console.log(j);
+      break;
     case TXT_MSG:
       console.log(j);
       break;

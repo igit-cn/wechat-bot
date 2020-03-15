@@ -1,13 +1,27 @@
 # wechat-bot  馈人玫瑰之手，历久犹有余香
 针对PC微信的个人机器人成品，学习使用，只提供DLL和客户端代码  
 点整包下载或release，下载最新版本  
-# 版本
+<p align="center">
+  <img src="./pic/github_logo.png" width="120">
+</p>
+
+<p align="center">
+   <a href="https://github.com/cixingguangming55555/wechat-bot/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/cixingguangming55555/wechat-bot" alt="GitHub">
+  </a>
+  <a href="https://github.com/cixingguangming55555/wechat-bot/releases">
+    <img src="https://img.shields.io/github/v/release/cixingguangming55555/wechat-bot?include_prereleases" alt="license">
+  </a>
+</p>
+
+# 贡献
+感谢 MickeyMi 贡献JAVA客户端代码
+# 微信版本
 微信:2.8.0.121  
-本品:2.0.1.55 
 # 开源
 * [2.7.1.88内存获取用户信息](userlist.cpp)
 # 整包下载
-[整包下载](https://github.com/cixingguangming55555/wechat-bot/archive/2.0.1.55.zip)
+[整包下载](https://github.com/cixingguangming55555/wechat-bot/archive/2.2.2.56.zip)
 # 文档
 [开发文档](https://www.showdoc.cc/wechatbot)
 # 声明
@@ -24,7 +38,8 @@
 4、客户端发送图片给好友  
 5、发送AT消息  
 6、获取chatroom成员列表(wxid),昵称暂无法对应  
-7、其它根据需求增加  
+7、获取个人微信信息  
+8、其它根据需求增加  
 # FAQ
 [问题帮助](./pic/help1.md)
 # 注意
@@ -38,8 +53,6 @@
 1、C++客户端  
 2、JS客户端  
 3、其他无（大家可以贡献java\python\等客户端代码）  
-# License
-[GPL](https://opensource.org/licenses/GPL-3.0)
 # 交流
 请扫码微信加好友，到时我会拉入群，备注：bot。空了我会处理的。
 
@@ -54,4 +67,5 @@
 </center>
 
 # 致谢
-感谢 MickeyMi 请我喝咖啡！
+感谢 MickeyMi 请我喝咖啡！  
+感谢 vluoyue（罗月）请我喝咖啡！  
