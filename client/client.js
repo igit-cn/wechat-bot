@@ -14,13 +14,26 @@ const TXT_MSG = 555;
 const PIC_MSG = 500;
 const AT_MSG = 550;
 const CHATROOM_MEMBER = 5010;
+const CHATROOM_MEMBER_NICK = 5020;
 const PERSONAL_INFO = 6500;
 const DEBUG_SWITCH = 6000;
+const PERSONAL_DETAIL =6550;
 
 function getid()
 {
    const id = Date.now();
    return id.toString();
+}
+function get_chat_nick()
+{
+  const j={
+    id:getid(),
+    type:CHATROOM_MEMBER_NICK,
+    content:'22049764763@chatroom',//chatroom id 
+    wxid:'ROOT'
+  };
+  const s= JSON.stringify(j);
+  return s;
 }
 function debug_switch()
 {
@@ -92,6 +105,17 @@ function send_pic_msg()
   const s = JSON.stringify(j);
   console.log(s);
   return s; 
+}
+function get_personal_detail()
+{
+  const j={
+    id:getid(),
+    type:PERSONAL_DETAIL,
+    content:'op:personal detail',
+    wxid:'zhanghua_cd'
+  };
+  const s = JSON.stringify(j);
+  return s;
 }
 /**
  * send_txt_msg : 发送消息给好友
@@ -172,15 +196,24 @@ function heartbeat(j)
 }
 ws.on('open', function open() 
 {
+  ws.send(get_chat_nick());
   //ws.send(get_personal_info());
   //ws.send(send_pic_msg());
   //ws.send(send_txt_msg());
   //ws.send(get_chatroom_memberlist());
-  ws.send(send_at_msg());
+  //ws.send(send_at_msg());
 
-
+  //ws.send(get_personal_detail());
   //ws.send(debug_switch());
   //ws.send(send_wxuser_list());
+  
+  /** 获取chatroom 成员昵称
+   * ws.send(get_chat_nick());
+   */
+
+  /**  通过wxid获取好友详细细腻
+   * ws.send(get_personal_detail());
+   */
 
   /** debugview调试信息开关，默认为关
    * ws.send(debug_switch());
@@ -228,6 +261,12 @@ ws.on('message', function incoming(data)
   const type = j.type;
   switch(type)
   {
+    case CHATROOM_MEMBER_NICK:
+      console.log(j);
+      break;
+    case PERSONAL_DETAIL:
+      console.log(j);
+      break;
     case AT_MSG:
       console.log(j);
       break;
