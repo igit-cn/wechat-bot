@@ -2,7 +2,7 @@
 针对PC微信的个人机器人成品，学习使用，只提供DLL和客户端代码  
 点整包下载或release，下载最新版本  
 <p align="center">
-  <img src="./pic/github_logo.png" width="120">
+  <img src="http://q89udkp2g.bkt.clouddn.com/github_logo.png" width="120">
 </p>
 
 <p align="center">
@@ -21,7 +21,7 @@
 # 开源
 * [2.7.1.88内存获取用户信息](userlist.cpp)
 # 整包下载
-[整包下载](https://github.com/cixingguangming55555/wechat-bot/archive/2.2.2.56.zip)
+[整包下载](https://github.com/cixingguangming55555/wechat-bot/archive/2.5.3.56.zip)
 # 文档
 [开发文档](https://www.showdoc.cc/wechatbot)
 # 声明
@@ -57,17 +57,18 @@
 请扫码微信加好友，到时我会拉入群，备注：bot。空了我会处理的。
 
 <center class="half">
-    <img src="./pic/qrcode.jpg" width="400"/>
+    <img src="http://q89udkp2g.bkt.clouddn.com/qrcode.jpg" width="400"/>
 </center>
 
 # 请我喝咖啡
 
 <center class="half">
-    <img src="./pic/38.jpg" width="400"/>
+    <img src="http://q89udkp2g.bkt.clouddn.com/38recv.jpg" width="800"/>
 </center>
 
 # 致谢
 感谢 MickeyMi 请我喝咖啡！  
 感谢 vluoyue（罗月）请我喝咖啡！  
 感谢 TedWang（微信） 请我喝咖啡！  
-感谢 Frank(微信）  请我喝咖啡！
+感谢 Frank(微信）  请我喝咖啡！  
+感谢 doxsen(微信） 请我喝咖啡！
