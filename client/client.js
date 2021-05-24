@@ -1,5 +1,13 @@
 /**
- * 
+ * 1、先获得好友和群的信息
+ *    ws.send(send_wxuser_list());
+ *    这里面有好友的wxid和群的roomid
+ * 2、然后可以调用
+ *    //ws.send(send_pic_msg());
+      //ws.send(send_txt_msg());
+      //ws.send(send_at_msg());
+   3、群成员和昵称：
+      ws.send(get_chat_nick_p("22049764763@chatroom"));
  */
 
 const WebSocket = require('ws');
@@ -14,13 +22,14 @@ const GET_USER_LIST_FAIL     = 5002;
 const TXT_MSG = 555;
 const PIC_MSG = 500;
 const AT_MSG = 550;
-const CHATROOM_MEMBER = 5010;
+const CHATROOM_MEMBER = 5010;//
 const CHATROOM_MEMBER_NICK = 5020;
 const PERSONAL_INFO = 6500;
 const DEBUG_SWITCH = 6000;
 const PERSONAL_DETAIL =6550;
 const DESTROY_ALL = 9999;
-
+const NEW_FRIEND_REQUEST=37;//微信好友请求消息
+const AGREE_TO_FRIEND_REQUEST=10000;//同意微信好友请求消息
 
 
 function getid()
@@ -47,7 +56,7 @@ function get_chat_nick()
   const j={
     id:getid(),
     type:CHATROOM_MEMBER_NICK,
-    content:'17339716569@chatroom',//chatroom id 23023281066@chatroom  17339716569@chatroom
+    content:'31252583242@chatroom',//chatroom id 23023281066@chatroom  17339716569@chatroom
     //5325308046@chatroom
     //5629903523@chatroom
     wxid:'ROOT'
@@ -72,10 +81,10 @@ function handle_nick(j){
     let i = 0;
     for(const item of data)
     {
-        console.log(i++,item.nickname)
+        //console.log(i++,item.nickname)
     }
 }
-function handle_memberlist(j)
+function handle_memberlist(j)//废弃
 {
    const data = j.content;
    let i =0;
@@ -85,13 +94,15 @@ function handle_memberlist(j)
       console.log(i++,item.roomid);  
     //console.log("------"+item.roomid+"--------");
       //ws.send(get_chat_nick_p(item.roomid));
-      //const memberlist=item.member;
+      const memberlist=item.member;
       //const len = nicklist.length();
       //console.log(len);
-      //for(const m of memberlist)
-      {
-          //console.log(m);//获得每个成员的wxid
-      }
+      //if(item.roomid == "23023281066@chatroom"){
+      for(const m of memberlist)
+        {
+          console.log(m);//获得每个成员的wxid
+        }
+      //}//
       /*for(const n of nicklist)//目前不建议使用
       {
         console.log(n);//获得每个成员的昵称，注意，没有和wxi对应的关系
@@ -117,7 +128,7 @@ function send_at_msg()
     type:AT_MSG,
     roomid:'23023281066@chatroom',//not null
     wxid:'wxid',//not null
-    content:'今天过来一起喝酒！同时，我们也发现，如果采用gb2312编码方式来计算getMsgContent()方法返回的文本所占字节数的结果是1365，这就是为什么很多朋友都说微信的文本消息最大长度好像只支持1300多字节，并不是接口文档中所说的2048字节，其实是忽略了编码方式，只是简单的使用了String类的getBytes()方法而不是getBytes("utf-8")方法去计算所占字节数。',//not null
+    content:'今天过来一起喝酒！',//not null
     nickname:'[微笑]Python'
   };
   
@@ -145,7 +156,8 @@ function send_pic_msg()
     type:PIC_MSG,
     content:'C:\\Users\\14988\\Desktop\\temp\\2.jpg',
     //wxid:'22428457414@chatroom'
-    wxid:'zhanghua_cd'
+    //wxid:'22428457414@chatroom'
+    wxid:'filehelper'
   };
   
   const s = JSON.stringify(j);
@@ -158,7 +170,7 @@ function get_personal_detail()
     id:getid(),
     type:PERSONAL_DETAIL,
     content:'op:personal detail',
-    wxid:'zhanghua_cd'
+    wxid:'wxid_nk2gsh27qlen21'
   };
   const s = JSON.stringify(j);
   return s;
@@ -183,8 +195,8 @@ function send_txt_msg()
   const j={
     id:getid(),
     type:TXT_MSG,
-    content:'【汽车新闻】\n1、2月中国汽车经销商库存预警指数为81.2%\n  https://auto.sina.com.cn/news/hy/2020-03-02/detail-iimxyqvz7206147.shtml\n2、2020年1月合资品牌插混车型上牌量超自主 今年或将全面超越\n  https://auto.sina.com.cn/news/zz/2020-03-02/detail-iimxyqvz7204399.shtml\n3、2月汽车经销商库存预警指数81.2% 同比上升27.7%\n  https://auto.sina.com.cn/news/hy/2020-03-02/detail-iimxyqvz7212598.shtml\n4、车谭|推进数字化转型 比亚迪与西门子达成战略合作\n  https://auto.sina.com.cn/news/hy/2020-03-02/detail-iimxxstf5752750.shtml\n5、业务量下滑，有员工被停工待岗，优信称经营遇到困难\n  https://auto.sina.com.cn/news/zz/2020-03-02/detail-iimxyqvz7183264.shtml\n6、外媒：中国电动车制造商正纷纷转向磷酸铁锂电池 以大幅降低成本\n  https://auto.sina.com.cn/news/hy/2020-03-02/detail-iimxyqvz7194871.shtml\n7、苹果自动驾驶项目裁员190人\n  https://auto.sina.com.cn/news/zz/2020-03-02/detail-iimxxstf5750692.shtml\n8、二手车复工率不足五成  车商盼消除壁垒提振消费\n  https://auto.sina.com.cn/news/zz/2020-03-02/detail-iimxxstf5742747.shtml\n9、车谭|天天拍车：2月份二手车交易逐渐回暖\n  https://auto.sina.com.cn/news/hy/2020-03-02/detail-iimxyqvz7187012.shtml\n10、因“货不对版”特斯拉停止全国交付？ 特斯拉：并未收到相关消息\n  https://auto.sina.com.cn/news/hy/2020-03-02/detail-iimxyqvz7171968.shtml\n',//文本消息内容
-    wxid:'zhanghua_cd'//wxid
+    content:'hello world',//文本消息内容
+    wxid:'leader318'//wxid  21527280818@chatroom
   };
   const s = JSON.stringify(j);
   return s;
@@ -251,8 +263,9 @@ function heartbeat(j)
 }
 ws.on('open', function open() 
 {
-  //ws.send(destroy_all());
-  //ws.send(get_chat_nick_p("19461204835@chatroom"));
+  //ws.send(get_chatroom_memberlist());
+  ws.send(destroy_all());
+  //ws.send(get_chat_nick_p("4865049815@chatroom"));
   //for(const item of roomid_list)
   //{
     //console.log(item);
@@ -262,12 +275,13 @@ ws.on('open', function open()
   //ws.send(get_personal_info());
   //ws.send(send_pic_msg());
   //ws.send(send_txt_msg());
-  //ws.send(get_chatroom_memberlist());
   //ws.send(send_at_msg());
 
   //ws.send(get_personal_detail());
   //ws.send(debug_switch());
   //ws.send(send_wxuser_list());
+  //ws.send(send_txt_msg());
+  
   
   /** 获取chatroom 成员昵称
    * ws.send(get_chat_nick());
@@ -283,10 +297,6 @@ ws.on('open', function open()
 
   /** 获取微信个人信息
    * ws.send(get_personal_info());
-   */
-
-  /** 获取群好友列表
-   * ws.send(get_chatroom_memberlist());
    */
 
   /** 发送群AT消息
@@ -319,13 +329,13 @@ ws.on('message', function incoming(data)
   //break;
   //return;
   const j = JSON.parse(data);
-  //console.log(j);
+  console.log(j);
   const type = j.type;
   switch(type)
   {
     case CHATROOM_MEMBER_NICK:
-      //console.log(j);
-      handle_nick(j);
+      console.log(j);
+      //handle_nick(j);
       break;
     case PERSONAL_DETAIL:
       console.log(j);
@@ -345,9 +355,9 @@ ws.on('message', function incoming(data)
     case PIC_MSG:
       console.log(j);
       break;
-    case CHATROOM_MEMBER:
-      //console.log(j);
-      handle_memberlist(j);
+    case CHATROOM_MEMBER://废弃，请使用CHATROOM_MEMBER_NICK 2020/12/06
+      console.log(j);
+      //handle_memberlist(j);
       break;
     case RECV_PIC_MSG:
         handle_recv_msg(j);
@@ -358,11 +368,23 @@ ws.on('message', function incoming(data)
     case HEART_BEAT:
       heartbeat(j);
     break;
+    case USER_LIST:
+      //console.log(j);
+      handle_wxuser_list(j);
+      break;
     case GET_USER_LIST_SUCCSESS:
       handle_wxuser_list(j);
       break;
     case GET_USER_LIST_FAIL:
       handle_wxuser_list(j);
+      break;
+     case NEW_FRIEND_REQUEST:
+       //console.log("---------------37----------");
+       console.log(j);
+       break;
+     case AGREE_TO_FRIEND_REQUEST:
+      console.log("---------------25----------");
+      console.log(j);
       break;
     //case SEND_TXT_MSG_SUCCSESS:
       //handle_recv_msg(j);

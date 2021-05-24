@@ -1,5 +1,46 @@
 # Change Log
-## version 4.5.7/.66(2020-06-25)
+## version 4.6.7.88(2020-05-13)
+### feature
+* #109
+## version 4.6.7.87(2020-05-10)
+### feature
+* #106
+### Bug Fixes
+* #105
+## version 4.6.7.85(2020-04-26)
+### feature
+* #102 #103
+### Bug Fixes
+* #101
+## version 4.6.7.82(2020-04-12)
+### feature
+* #100
+## version 4.6.7.81(2020-04-06)
+### feature
+* get personal info(wx)
+## version 4.6.7.80(2020-04-04)
+### feature
+* #99
+## version 4.6.7.79(2020-04-04)
+### Bug Fixes
+* json exception
+## version 4.6.7.78(2021-3-30)
+### wechat upgrade to 3.2.1.121 
+## version 4.5.7.73(2020-12-11)
+### Bug Fixes
+* #80
+## version 4.5.7.72(2020-12-06)
+### Bug Fixes
+* #36 #4
+### invalid issues
+* #38 #79
+## version 4.5.7.71(2020-10-18)
+### Bug Fixes
+* #71
+## version 4.5.7.70(2020-08-19)
+### Bug Fixes
+* new friend request msg
+## version 4.5.7.69(2020-06-25)
 ### Feature
 * urgrade wechat to 2.9.0.123   
 ## version 3.5.7.66(2020-05-24)
