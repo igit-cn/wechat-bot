@@ -1,27 +1,41 @@
 # Change Log
-## version 4.6.7.88(2020-05-13)
+## version 4.7.7.91(2021-08-01)
+### implenmented enhancements
+* wechat version urgrade to 3.3.0.115
+## version 4.6.7.91(2021-07-27)
+### Bug Fixes
+* return error character on get_personal_info 
+## version 4.6.7.90(2021-06-23)
+### Bug Fixes
+* crash in multi open
+### enhanced
+* set timer for message which send to client
+## version 4.6.7.89(2021-05-28)
+### Bug Fixes
+* #114   
+## version 4.6.7.88(2021-05-13)
 ### feature
 * #109
-## version 4.6.7.87(2020-05-10)
+## version 4.6.7.87(2021-05-10)
 ### feature
 * #106
 ### Bug Fixes
 * #105
-## version 4.6.7.85(2020-04-26)
+## version 4.6.7.85(2021-04-26)
 ### feature
 * #102 #103
 ### Bug Fixes
 * #101
-## version 4.6.7.82(2020-04-12)
+## version 4.6.7.82(2021-04-12)
 ### feature
 * #100
-## version 4.6.7.81(2020-04-06)
+## version 4.6.7.81(2021-04-06)
 ### feature
 * get personal info(wx)
-## version 4.6.7.80(2020-04-04)
+## version 4.6.7.80(2021-04-04)
 ### feature
 * #99
-## version 4.6.7.79(2020-04-04)
+## version 4.6.7.79(2021-04-04)
 ### Bug Fixes
 * json exception
 ## version 4.6.7.78(2021-3-30)
@@ -49,7 +63,7 @@
 
 ## version 3.4.7.66(2020-05-24)
 ### Feature
-* 希望可以增加发送文件的功能,closes #28
+* send attatch,closes #28
 
 ## version 3.3.7.66(2020-5-14)
 ### Feature
